@@ -102,7 +102,6 @@ router.get("/booking/get", auth.userGuard, (req, res) => {
     });
 });
 
-
 router.get("/bidding/get", (req, res) => {
   Bidding.find()
     .populate("vehicle_id")
