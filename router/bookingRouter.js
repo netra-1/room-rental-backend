@@ -39,7 +39,7 @@ router.post("/bidding/add/:vehicle_id", auth.userGuard, (req, res) => {
 });
 
 router.put("/bidding/update/:id", auth.userGuard, (req, res) => {
-  Booking.updateOne(
+  Bidding.updateOne(
     { _id: req.params.id },
     {
       price : req.body.price,
@@ -104,6 +104,25 @@ router.get("/booking/get", auth.userGuard, (req, res) => {
 
 router.get("/bidding/get", (req, res) => {
   Bidding.find()
+    .populate("vehicle_id")
+    .populate("user_id")
+    .then((booking) => {
+      if (booking != null) {
+        res.status(201).json({
+          success: true,
+          data: booking,
+        });
+      }
+    })
+    .catch((e) => {
+      res.json({
+        msg: e,
+      });
+    });
+});
+
+router.get("/user/bidding/get/",auth.userGuard, (req, res) => {
+  Bidding.find({user_id: req.userInfo._id})
     .populate("vehicle_id")
     .populate("user_id")
     .then((booking) => {

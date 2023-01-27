@@ -103,7 +103,7 @@ router.delete("/vehicle/delete/:id", auth.userGuard, (req, res) => {
 
 
 
-router.get("/vehicle/get/all/ok/all", (req, res) => {
+router.get("/vehicle/get/all/ok/all/all/ok/all/ok", (req, res) => {
   Vehicle.find()
     .then((vehicle) => {
       if (vehicle != null) {
